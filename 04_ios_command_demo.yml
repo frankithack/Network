@@ -1,25 +1,14 @@
 ---
-- name: Démonstration des commandes Cisco IOS
+- name: Afficher les interfaces sur Cisco IOS
   hosts: routers
   gather_facts: no
 
   tasks:
-    - name: Exécuter les commandes show
+    - name: Exécuter la commande show ip interface brief
       cisco.ios.ios_command:
         commands:
-          - show run
-          - show ip int brief
-      register: sh_outputs
+          - show ip interface brief
+      register: interface_output
 
     - debug:
-        msg: "{{ sh_outputs.stdout_lines }}"
-
-    - name: Vérifier les conditions
-      cisco.ios.ios_command:
-        commands:
-          - show run
-          - show ip int brief
-        match: any
-        wait_for:
-          - result[0] contains "description connected to core"
-          - result[1] contains "ethernet0/1"
+        msg: "{{ interface_output.stdout_lines }}"
