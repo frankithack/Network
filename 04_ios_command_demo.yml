@@ -1,23 +1,25 @@
 ---
-- name: Cisco IOS Command Demo
+- name: Démonstration des commandes Cisco IOS
   hosts: routers
+  gather_facts: no
 
   tasks:
-    - name: Execute show commands
-      ios_command:
+    - name: Exécuter les commandes show
+      cisco.ios.ios_command:
         commands:
           - show run
           - show ip int brief
       register: sh_outputs
-    - debug:
-        msg: "{{sh_outputs.stdout_lines}}"
 
-    - name: Check Conditions
-      ios_command:
+    - debug:
+        msg: "{{ sh_outputs.stdout_lines }}"
+
+    - name: Vérifier les conditions
+      cisco.ios.ios_command:
         commands:
           - show run
           - show ip int brief
         match: any
         wait_for:
-          - result[0] contains description connected to core
-          - result[1] contains  ethernet0/1
+          - result[0] contains "description connected to core"
+          - result[1] contains "ethernet0/1"
