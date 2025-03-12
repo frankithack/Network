@@ -20,4 +20,4 @@
         match: any
         wait_for:
           - result[0] contains description connected to core
-          - result[1] contains GigabitEthernet0/1
+          - result[1] contains  ethernet0/1
