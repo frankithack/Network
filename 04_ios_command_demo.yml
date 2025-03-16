@@ -1,6 +1,6 @@
 ---
 - name: Afficher les interfaces sur Cisco IOS
-  hosts: routers
+  hosts: R1
   gather_facts: no
 
   tasks:
