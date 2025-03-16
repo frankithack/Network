@@ -1,6 +1,6 @@
 ---
 - name: Afficher les interfaces sur Cisco IOS
-  hosts: R1
+  hosts: 192.168.96.138
   gather_facts: no
 
   tasks:
